@@ -252,6 +252,32 @@
 
       .content-section { padding: 30px 25px; }
       .content-section h2 { font-size: 2.8rem; }
+      
+      /* --- AJUSTE PARA LEGENDAS NO CELULAR --- */
+      .photo-item figcaption {
+        opacity: 1; /* Torna a legenda sempre visível */
+        font-size: 1.3rem;
+        padding-top: 5px;
+      }
+      
+      /* Remove a rotação para um layout mais limpo no celular */
+      .photo-item,
+      .photo-item:nth-child(1),
+      .photo-item:nth-child(2),
+      .photo-item:nth-child(3),
+      .photo-item:nth-child(4),
+      .photo-item:nth-child(5) {
+        transform: rotate(0deg);
+      }
+
+      /* Mantém o efeito de hover desativado no celular, mas adiciona um feedback de toque */
+      .photo-item:hover {
+        transform: scale(1) !important;
+      }
+      .photo-item:active {
+        transform: scale(0.97) !important;
+        transition: transform 0.2s ease;
+      }
     }
   </style>
 </head>
@@ -266,23 +292,19 @@
     <section class="photo-gallery hidden">
       <figure class="photo-item">
         <img src="https://fv5-3.files.fm/thumb_show.php?i=nwr8anfd3a&view&v=1" alt="Foto romântica 1">
-        <figcaption>Com você, a vida tem mais cor.</figcaption>
+       <figcaption>Nosso Início</figcaption>
       </figure>
       <figure class="photo-item">
-        <img src="https://fv5-3.files.fm/thumb_show.php?i=hgs2js7yyu&view&v=1" alt="Foto romântica 2">
-        <figcaption>E o nosso mundo se completa.</figcaption>
+        <img src="https://fv5-3.files.fm/thumb_show.php?i=hgs2js7yyu&view&v=1" alt="Foto romântica 2">        <figcaption>Aquele Dia</figcaption>
       </figure>
       <figure class="photo-item">
-        <img src="https://fv5-3.files.fm/thumb_show.php?i=jzs7efz9z7&view&v=1" alt="Foto romântica 3">
-        <figcaption>Você é o meu lugar favorito.</figcaption>
+        <img src="https://fv5-3.files.fm/thumb_show.php?i=jzs7efz9z7&view&v=1" alt="Foto romântica 3">        <figcaption>Pura Alegria</figcaption>
       </figure>
       <figure class="photo-item">
-        <img src="https://fv5-3.files.fm/thumb_show.php?i=vp24gdqq5s&view&v=1" alt="Foto romântica 4">
-        <figcaption>E a minha melhor escolha, todos os dias.</figcaption>
+        <img src="https://fv5-3.files.fm/thumb_show.php?i=vp24gdqq5s&view&v=1" alt="Foto romântica 4">        <figcaption>Sempre Juntos</figcaption>
       </figure>
       <figure class="photo-item">
-        <img src="https://fv5-3.files.fm/thumb_show.php?i=vx72tx2en2&view&v=1" alt="Foto romântica 5">
-        <figcaption>Pra sempre o meu melhor par.</figcaption>
+        <img src="https://fv5-3.files.fm/thumb_show.php?i=vx72tx2en2&view&v=1" alt="Foto romântica 5">        <figcaption>Meu Porto Seguro</figcaption>
       </figure>
     </section>
 
