@@ -3,239 +3,355 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Para Meu Amor ❤️</title>
+  <title>Para o Meu Grande Amor ❤️</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- Variáveis de Cor e Estilos Globais --- */
+    /* --- Estilos Globais e Variáveis --- */
     :root {
-      --primary-color: #d63384; /* Rosa vibrante */
-      --secondary-color: #4a2c4c; /* Roxo escuro para texto */
-      --background-light: #fff0f6; /* Rosa bem clarinho */
-      --background-gradient: linear-gradient(135deg, #ffe6f0, #fff0f6);
-      --border-color: #e0a3c2;
-      --shadow-color: rgba(214, 51, 132, 0.2);
+      --primary-color: #e91e63; /* Rosa mais intenso */
+      --secondary-color: #3b1b2c;
+      --background-light: #fff5f7;
+      --background-gradient: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      --shadow-color: rgba(233, 30, 99, 0.15);
+      --font-heading: 'Dancing Script', cursive;
+      --font-body: 'Montserrat', sans-serif;
     }
 
     body {
       margin: 0;
-      font-family: 'Lato', sans-serif; /* Fonte padrão para leitura */
-      background: var(--background-gradient);
+      font-family: var(--font-body);
+      background-color: var(--background-light);
       color: var(--secondary-color);
       overflow-x: hidden;
+    }
+
+    /* --- Elementos de Animação (para JS) --- */
+    .hidden {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* --- Cabeçalho --- */
     header {
       text-align: center;
-      padding: 60px 20px;
-      background: var(--background-light);
-      border-bottom: 2px solid var(--border-color);
-      position: relative;
+      padding: 80px 20px;
+      background: var(--background-gradient);
+      color: white;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
     header h1 {
-      font-family: 'Dancing Script', cursive; /* Fonte cursiva para o título */
-      color: var(--primary-color);
-      font-size: 3.5rem;
+      font-family: var(--font-heading);
+      font-size: 4.5rem;
       margin: 0;
-      animation: fadeInDown 1.5s ease-out;
     }
 
     header p {
-      font-size: 1.3rem;
-      margin-top: 10px;
-      animation: fadeInUp 1.5s ease-out;
-      animation-delay: 0.3s;
-      opacity: 0;
-      animation-fill-mode: forwards;
+      font-size: 1.4rem;
+      margin-top: 15px;
+      font-weight: 400;
     }
 
-    /* --- Galeria de Fotos --- */
+    /* --- Galeria Polaroid --- */
     .photo-gallery {
-      max-width: 1000px;
-      margin: 50px auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
+      max-width: 1100px;
+      margin: 80px auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
       padding: 0 20px;
     }
 
     .photo-item {
-      width: 100%;
-      padding-top: 100%; /* Proporção quadrada */
-      border-radius: 20px;
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 8px 20px var(--shadow-color);
-      position: relative;
-      overflow: hidden;
+      cursor: pointer;
+      background: white;
+      padding: 15px 15px 30px 15px;
+      border-radius: 4px;
+      box-shadow: 0 10px 25px var(--shadow-color);
       transition: transform 0.4s ease, box-shadow 0.4s ease;
-      animation: popIn 1s ease-out forwards;
-      opacity: 0; /* Inicia invisível para a animação */
+      position: relative;
     }
 
-    /* Efeito de hover nas fotos */
     .photo-item:hover {
-      transform: scale(1.05) rotate(1deg);
-      box-shadow: 0 12px 30px rgba(214, 51, 132, 0.4);
+      transform: scale(1.08) rotate(0deg) !important; /* Anula a rotação no hover para destacar */
+      box-shadow: 0 15px 40px rgba(233, 30, 99, 0.3);
+      z-index: 10;
     }
 
-    /* Adicionando delay na animação de cada foto */
-    .photo-item:nth-child(1) { animation-delay: 0.2s; }
-    .photo-item:nth-child(2) { animation-delay: 0.4s; }
-    .photo-item:nth-child(3) { animation-delay: 0.6s; }
-    .photo-item:nth-child(4) { animation-delay: 0.8s; }
-    .photo-item:nth-child(5) { animation-delay: 1.0s; }
+    .photo-item img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-item figcaption {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      text-align: center;
+      margin-top: 10px;
+      color: var(--primary-color);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .photo-item:hover figcaption {
+      opacity: 1;
+    }
+
+    /* Rotações diferentes para cada polaroid */
+    .photo-item:nth-child(1) { transform: rotate(-5deg); }
+    .photo-item:nth-child(2) { transform: rotate(3deg); }
+    .photo-item:nth-child(3) { transform: rotate(-2deg); }
+    .photo-item:nth-child(4) { transform: rotate(5deg); }
+    .photo-item:nth-child(5) { transform: rotate(-4deg); }
 
 
     /* --- Seções de Conteúdo --- */
     .content-section {
       max-width: 800px;
-      margin: 40px auto;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      margin: 60px auto;
+      padding: 50px;
       text-align: center;
-      backdrop-filter: blur(5px);
-      animation: fadeIn 1.5s ease-out forwards;
-      opacity: 0;
     }
-    
-    .content-section:nth-of-type(1) { animation-delay: 0.5s; }
-    .content-section:nth-of-type(2) { animation-delay: 0.8s; }
 
     .content-section h2 {
-      font-family: 'Dancing Script', cursive;
-      color: var(--primary-color);
-      font-size: 2.8rem;
-      margin-bottom: 20px;
+      font-family: var(--font-heading);
+      font-size: 3.5rem;
+      margin-bottom: 25px;
+      background: linear-gradient(45deg, #e91e63, #ff80ab);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .content-section p {
-      font-size: 1.15rem;
-      line-height: 1.8;
-      margin-bottom: 15px;
+      font-size: 1.1rem;
+      line-height: 1.9;
+      margin-bottom: 20px;
     }
+
+    /* Divisor de Seção */
+    .divider {
+      border: 0;
+      height: 2px;
+      background: var(--background-gradient);
+      position: relative;
+      max-width: 150px;
+      margin: 40px auto;
+    }
+    .divider::before {
+      content: '❤️';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--background-light);
+      padding: 0 15px;
+      font-size: 1.5rem;
+    }
+    
+    /* Lista "Motivos para te Amar" */
+    #reasons-list {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      display: inline-block;
+      margin-top: 30px;
+    }
+
+    #reasons-list li {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    #reasons-list li::before {
+      content: '💖';
+      font-size: 1.5rem;
+      margin-right: 15px;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
 
     /* --- Rodapé --- */
     footer {
       text-align: center;
-      padding: 30px;
-      background: var(--background-light);
+      padding: 40px;
       margin-top: 50px;
-      font-size: 1rem;
-      border-top: 2px solid var(--border-color);
+      background: var(--background-gradient);
+      color: white;
+      font-size: 1.1rem;
     }
 
-    /* --- Corações Flutuantes --- */
-    .heart {
+    /* --- Galeria Lightbox (Modal) --- */
+    .lightbox {
+      display: none;
       position: fixed;
-      bottom: -50px;
-      font-size: 24px;
-      animation-name: rise;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      opacity: 0;
-      z-index: -1;
-    }
-
-    .heart:nth-child(1) { left: 10%; animation-duration: 10s; animation-delay: 0s; color: #ff4d6d; }
-    .heart:nth-child(2) { left: 25%; animation-duration: 8s; animation-delay: 2s; color: #ff8fa3; }
-    .heart:nth-child(3) { left: 45%; animation-duration: 12s; animation-delay: 1s; color: #ff4d6d; }
-    .heart:nth-child(4) { left: 65%; animation-duration: 7s; animation-delay: 4s; color: #ffc2d1; }
-    .heart:nth-child(5) { left: 85%; animation-duration: 9s; animation-delay: 3s; color: #ff8fa3; }
-
-    /* --- Animações --- */
-    @keyframes rise {
-      0% { transform: translateY(0); opacity: 0; }
-      10% { opacity: 0.8; }
-      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
     }
     
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.5); }
-      100% { opacity: 1; transform: scale(1); }
+    .lightbox-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      animation: zoomIn 0.5s ease;
+    }
+    
+    .close-lightbox {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
+    .close-lightbox:hover {
+      transform: scale(1.2);
+    }
+    
+    /* --- Animações Extras --- */
+    @keyframes zoomIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
 
-    /* --- Responsividade para Celulares --- */
+    /* --- Responsividade --- */
     @media (max-width: 768px) {
-      header h1 { font-size: 2.8rem; }
+      header h1 { font-size: 3rem; }
       header p { font-size: 1.1rem; }
       
-      .photo-gallery {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 15px;
-        padding: 0 15px;
-      }
+      .photo-item img { width: 200px; height: 200px; }
 
-      .content-section {
-        padding: 30px 25px;
-        margin: 30px 15px;
-      }
-
-      .content-section h2 { font-size: 2.4rem; }
-      .content-section p { font-size: 1rem; }
+      .content-section { padding: 30px 25px; }
+      .content-section h2 { font-size: 2.8rem; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Para Meu Amor ❤️</h1>
-    <p>Cada momento ao seu lado é uma obra de arte</p>
+  <header class="hidden">
+    <h1>Para o Meu Grande Amor ❤️</h1>
+    <p>Uma pequena celebração da nossa história</p>
   </header>
 
-  <div class="hearts-container">
-    <div class="heart">❤️</div>
-    <div class="heart">💖</div>
-    <div class="heart">💕</div>
-    <div class="heart">💞</div>
-    <div class="heart">💓</div>
-  </div>
+  <main>
+    <section class="photo-gallery hidden">
+      <figure class="photo-item">
+        <img src="https://fv5-3.files.fm/thumb_show.php?i=nwr8anfd3a&view&v=1" alt="Foto romântica 1">
+        <figcaption>Com você, a vida tem mais cor.</figcaption>
+      </figure>
+      <figure class="photo-item">
+        <img src="https://fv5-3.files.fm/thumb_show.php?i=hgs2js7yyu&view&v=1" alt="Foto romântica 2">
+        <figcaption>E o nosso mundo se completa.</figcaption>
+      </figure>
+      <figure class="photo-item">
+        <img src="https://fv5-3.files.fm/thumb_show.php?i=jzs7efz9z7&view&v=1" alt="Foto romântica 3">
+        <figcaption>Você é o meu lugar favorito.</figcaption>
+      </figure>
+      <figure class="photo-item">
+        <img src="https://fv5-3.files.fm/thumb_show.php?i=vp24gdqq5s&view&v=1" alt="Foto romântica 4">
+        <figcaption>E a minha melhor escolha, todos os dias.</figcaption>
+      </figure>
+      <figure class="photo-item">
+        <img src="https://fv5-3.files.fm/thumb_show.php?i=vx72tx2en2&view&v=1" alt="Foto romântica 5">
+        <figcaption>Pra sempre o meu melhor par.</figcaption>
+      </figure>
+    </section>
 
-  <div class="photo-gallery">
-    <div class="photo-item" style="background-image: url('https://fv5-3.files.fm/thumb_show.php?i=nwr8anfd3a&view&v=1');"></div>
-    <div class="photo-item" style="background-image: url('https://fv5-3.files.fm/thumb_show.php?i=hgs2js7yyu&view&v=1');"></div>
-    <div class="photo-item" style="background-image: url('https://fv5-3.files.fm/thumb_show.php?i=jzs7efz9z7&view&v=1');"></div>
-    <div class="photo-item" style="background-image: url('https://fv5-3.files.fm/thumb_show.php?i=vp24gdqq5s&view&v=1');"></div>
-    <div class="photo-item" style="background-image: url('https://fv5-3.files.fm/thumb_show.php?i=vx72tx2en2&view&v=1');"></div>
-  </div>
-
-  <section class="content-section">
-    <h2>Minha Mensagem</h2>
-    <p>Amor, cada segundo ao seu lado é um presente que a vida me deu. Seu sorriso ilumina meus dias e o seu carinho aquece minha alma. Você transformou meu mundo em um lugar muito mais feliz.</p>
-    <p>Eu te amo mais do que as palavras podem expressar! ❤️</p>
-  </section>
-
-  <section class="content-section">
-    <h2>Nossas Memórias</h2>
-    <p>Lembro do nosso primeiro encontro como se fosse ontem, da primeira vez que segurei sua mão, e do nosso primeiro beijo que selou o início da nossa história. Cada instante está eternamente guardado no meu coração.</p>
-    <p>Mal posso esperar para construir um futuro inteiro de novas memórias ao seu lado!</p>
-  </section>
-
-  <footer>
-    Feito com todo meu amor, especialmente para você.
+    <section class="content-section hidden">
+      <hr class="divider">
+      <h2>Nossa História</h2>
+      <p>Amor, cada momento que passamos juntos se torna uma memória preciosa. Desde as nossas primeiras conversas até os nossos sonhos compartilhados, cada passo ao seu lado é uma aventura maravilhosa. Você trouxe cores que eu não conhecia para a minha vida.</p>
+    </section>
+    
+    <section class="content-section hidden">
+       <h2>Alguns Motivos Para Te Amar</h2>
+       <ul id="reasons-list">
+          <li>Pelo seu sorriso que ilumina tudo.</li>
+          <li>Pela sua capacidade de me fazer rir.</li>
+          <li>Pelo seu abraço que é o meu lar.</li>
+          <li>Por ser minha maior inspiração.</li>
+       </ul>
+    </section>
+  </main>
+  
+  <footer class="hidden">
+    Feito com um amor que não cabe no peito, para você.
   </footer>
+
+  <div id="lightbox" class="lightbox">
+    <span id="close-lightbox" class="close-lightbox">&times;</span>
+    <img id="lightbox-image" class="lightbox-content">
+  </div>
+
+  <script>
+    // --- LÓGICA PARA ANIMAÇÃO AO ROLAR ---
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.1 // Ativa quando 10% do elemento está visível
+    });
+
+    const hiddenElements = document.querySelectorAll('.hidden');
+    hiddenElements.forEach((el) => observer.observe(el));
+
+    // --- LÓGICA PARA GALERIA LIGHTBOX ---
+    const photoItems = document.querySelectorAll('.photo-item');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const closeBtn = document.getElementById('close-lightbox');
+
+    photoItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const imgSrc = item.querySelector('img').src;
+        lightboxImage.src = imgSrc;
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    const closeLightbox = () => {
+      lightbox.style.display = 'none';
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) { // Fecha somente se clicar no fundo
+        closeLightbox();
+      }
+    });
+  </script>
 
 </body>
 </html>
